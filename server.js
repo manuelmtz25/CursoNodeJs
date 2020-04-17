@@ -33,6 +33,10 @@ router.post("/message", function (req, res) {
     //response.success(req, res, 'Creado correctamente', 201);
 });
 
+//todo lo que pongamos en la carpeta "public" quedará expuesto a través de la ruta /app
+//ejemplo http://localhost:3000/app/css/style.css
+app.use('/app', express.static('public'));
+
 // router.get('/', function(req, res){
 //     res.send('Hola desde GET');
 // })
