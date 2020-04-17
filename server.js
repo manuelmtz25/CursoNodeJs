@@ -19,7 +19,10 @@ router.get("/message", function (req, res) {
 router.post("/message", function (req, res) {
   console.log(req.query);
   console.log(req.body);
-  res.send(`Mensaje -${req.body.text}- añadido correctamente`);
+  //res.send(`Mensaje -${req.body.text}- añadido correctamente`);
+  //res.send() //respuesta vacía
+  //res.status(201).send() //respuesta con estado
+  res.status(201).send({error:'', body:'Creado correctamente'}) //respuesta estructurada
 });
 
 // router.get('/', function(req, res){
