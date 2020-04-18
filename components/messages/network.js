@@ -5,6 +5,7 @@
 const express = require('express');
 const router = express.Router();
 const response = require('../../network/response');
+const controller = require('./controller');
 
 router.get('/', function (req, res) {
     console.log(req.headers);
@@ -15,19 +16,14 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    console.log(req.query);
-    console.log(req.body);
-    if (req.query.error == 'ok') {
-        response.error(
-            req,
-            res,
-            'Error simulado',
-            450,
-            'Es sólo una simulación de errores'
-        );
-    } else {
-        response.success(req, res, 'Creado correctamente', 201);
-    }
+    controller
+        .addMessage(req.body.user, req.body.message)
+        .then((fullMessage) => {
+            response.success(req, res, fullMessage, 201);
+        })
+        .catch(() => {
+            response.error(req, res, 'Información inválida', 400);
+        });
 });
 
 module.exports = router;
